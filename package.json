@@ -24,6 +24,7 @@
     "@nestjs/event-emitter": "^1.4.1",
     "@nestjs/platform-express": "^9.0.0",
     "fibonacci": "^1.6.11",
+    "piscina": "^3.2.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
