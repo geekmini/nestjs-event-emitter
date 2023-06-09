@@ -10,7 +10,7 @@ Let's first see **2** **cases** if error happens in error handler using event em
 
 ### Sync Event Handler
 - `The EventEmitter calls all listeners synchronously in the order in which they were registered.` from [node.js](https://nodejs.dev/en/api/v19/events/#asynchronous-vs-synchronous)
-- Therefore, for long-running blocking task, it may block the single thread of node.js [stackoverflow](https://stackoverflow.com/questions/38881170/when-should-i-use-eventemitter#answer-70733222)
+- Whether the call is sync or async, long-running task will block the whole application after all. So I don't agree with this. [stackoverflow](https://stackoverflow.com/questions/38881170/when-should-i-use-eventemitter#answer-70733222)
 
 ### Async Event Handler
 - it will lead to unhandled exceptions and we need extra code to deal with this case [node.js](https://nodejs.dev/en/api/v19/events/#capture-rejections-of-promises)
@@ -27,6 +27,8 @@ process.on('uncaughtException', (err) => {
   console.log(err);
 });
 ```
+- for long-running block operations, it's no matter it's sync or async in event handler.
+- for io instance task, it's better to use async！
 
 ## Conclusion
 - **Don't use Nest.js Event Emitter, it's not complete.**

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 
 // ! need to register as module provider
@@ -8,12 +8,17 @@ export class AppService {
   // unless we use native nodejs async storage to store the request object.
   // but it will brings more overhead.
   @OnEvent('order.created')
-  handleOrderCreated(data: any) {
-    console.log({ data });
+  async handleOrderCreated(data: any) {
+    console.log({ inputDataOfEventHandler: data });
+    console.time();
+    const result = this.fib(60);
+    console.timeEnd();
+    console.log(result);
     console.log('order created handled');
+  }
 
-    // ! it will cause server down
-    // ! event exception filter doesn't work on this case
-    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+  private fib(num: number) {
+    if (num <= 1) return 1;
+    return this.fib(num - 1) + this.fib(num - 2);
   }
 }
