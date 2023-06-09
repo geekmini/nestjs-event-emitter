@@ -4,6 +4,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AppService } from './app.service';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './exception.filter';
+import { FibWorkerHost } from './fibWorker.host';
 
 @Module({
   imports: [EventEmitterModule.forRoot()],
@@ -14,6 +15,7 @@ import { HttpExceptionFilter } from './exception.filter';
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
+    FibWorkerHost,
   ],
 })
 export class AppModule {}
